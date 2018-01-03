@@ -1,0 +1,88 @@
+Training DBNs of the sizes used in this paper is quite computationally
+expensive. Training was accelerated by exploiting
+graphics processors, in particular GPUs in a NVIDIA Tesla
+S1070 system, using the CUDAMAT library [28]. A single
+pass over the entire training set (an “epoch”) for a model with
+5 hidden layers and 2048 units per layer took about 6 minutes
+during pre-training of the topmost layer and about 11 minutes
+during fine-tuning the whole network with backpropagation. A
+single GPU learns at 20 times faster than a single 2.66 GHz
+Xeon core. 
+
+All DBNs were pre-trained with a fixed recipe using
+stochastic gradient decent with a mini-batch size of 128
+training cases. For Gaussian-binary RBMs, we ran 225 epochs
+with a fixed learning rate of 0.002 while for binary-binary
+RBMs we used 75 epochs with a learning rate of 0.02.
+
+Acoustic Modeling using Deep Belief Networks
+Abdel-rahman Mohamed, George E. Dahl, and Geoffrey Hinton
+
+
+---------------------------------------------------
+
+The ability of multilayer networks trained with gradient
+descent to learn complex, high-dimensional, nonlinear
+mappings from large collections of examples makes them
+obvious candidates for image recognition tasks. In the
+traditional model of pattern recognition, a hand-designed
+feature extractor gathers relevant information from the input
+and eliminates irrelevant variabilities. A trainable classifier
+then categorizes the resulting feature vectors into classes. In
+this scheme, standard, fully connected multilayer networks
+can be used as classifiers. A potentially more interesting
+scheme is to rely as much as possible on learning in the
+feature extractor itself. In the case of character recognition,
+a network could be fed with almost raw inputs (e.g.,
+size-normalized images). While this can be done with an
+ordinary fully connected feedforward network with some
+success for tasks such as character recognition, there are
+problems.
+First, typical images are large, often with several hundred
+variables (pixels). A fully connected first layer with, e.g.,
+one hundred hidden units in the first layer would already
+contain several tens of thousands of weights. Such a large
+number of parameters increases the capacity of the system
+and therefore requires a larger training set. In addition, the
+memory requirement to store so many weights may rule out
+certain hardware implementations. But the main deficiency
+of unstructured nets for image or speech applications is that
+they have no built-in invariance with respect to translations
+or local distortions of the inputs. Before being sent to
+the fixed-size input layer of an NN, character images, 
+or other 2-D or one-dimensional (1-D) signals, must be
+approximately size normalized and centered in the input
+field. Unfortunately, no such preprocessing can be perfect:
+handwriting is often normalized at the word level, which
+can cause size, slant, and position variations for individual
+characters. This, combined with variability in writing style,
+will cause variations in the position of distinctive features
+in input objects. In principle, a fully connected network of
+sufficient size could learn to produce outputs that are invariant
+with respect to such variations. However, learning such
+a task would probably result in multiple units with similar
+weight patterns positioned at various locations in the input
+so as to detect distinctive features wherever they appear on
+the input. Learning these weight configurations requires a
+very large number of training instances to cover the space of
+possible variations. In convolutional networks, as described
+below, shift invariance is automatically obtained by forcing
+the replication of weight configurations across space.
+Secondly, a deficiency of fully connected architectures is
+that the topology of the input is entirely ignored. The input
+variables can be presented in any (fixed) order without affecting
+the outcome of the training. On the contrary, images
+(or time-frequency representations of speech) have a strong
+2-D local structure: variables (or pixels) that are spatially or
+temporally nearby are highly correlated. Local correlations
+are the reasons for the well-known advantages of extracting
+and combining local features before recognizing spatial
+or temporal objects, because configurations of neighboring
+variables can be classified into a small number of categories
+(e.g., edges, corners, etc.). Convolutional networks force
+the extraction of local features by restricting the receptive
+fields of hidden units to be local.
+
+
+Gradient-Based Learning Applied to Document Recognition
+YANN LECUN, LEON BOTTOU, YOSHUA BENGIO, AND PATRICK HAFFNER
