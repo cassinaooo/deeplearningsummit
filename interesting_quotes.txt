@@ -86,3 +86,6 @@ fields of hidden units to be local.
 
 Gradient-Based Learning Applied to Document Recognition
 YANN LECUN, LEON BOTTOU, YOSHUA BENGIO, AND PATRICK HAFFNER
+
+
+----------------- 

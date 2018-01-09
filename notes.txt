@@ -13,4 +13,3 @@
 - Intro a convolução
 - Redes convolucionais
 - História das Redes convolucionais
-- História da Visão Computacional 
